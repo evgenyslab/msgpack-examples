@@ -1,0 +1,11 @@
+.DS_Store
+*.venv/
+.venv/*
+*.idea
+*.idea/*
+*.swp
+.idea/*
+*.pyx
+*.pyc
+cmake-build-debug/*
+build/*
