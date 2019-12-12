@@ -8,3 +8,4 @@ include_directories(
   )
 
 add_executable(read_write_io src/read_write_io.cpp)
+add_executable(classPacker src/classPacker.cpp)
