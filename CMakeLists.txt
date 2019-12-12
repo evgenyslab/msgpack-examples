@@ -7,4 +7,4 @@ include_directories(
         ${PROJECT_SOURCE_DIR}
   )
 
-add_executable(example_01 src/example_01.cpp)
+add_executable(read_write_io src/read_write_io.cpp)
