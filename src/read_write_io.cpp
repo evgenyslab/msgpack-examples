@@ -56,24 +56,24 @@ void file_rw(){
     // create a key-value pair packer linked to file-buffer
     msgpack::packer<msgpack::fbuffer> packer(&fileBuffer_rw);
     // create key-value map definition, n = number of items in map...
-    packer.pack_map(1);
+    packer.pack_map(1);                                 // MESSAGE 1
     // Populate:
     // key
-    packer.pack(std::string("x"));
+    packer.pack(std::string("x"));                      // MESSAGE 1
     // value
-    packer.pack(3);
+    packer.pack(3);                                     // MESSAGE 1
     // pack as binary with length l, first set lenght:
-    packer.pack_bin(10);
+    packer.pack_bin(10);                                // MESSAGE 2
     // set data as char array:
-    packer.pack_bin_body("abcdefghij", 10);
+    packer.pack_bin_body("abcdefghij", 10);             // MESSAGE 2
     // key value with binary...
-    packer.pack_map(1);
+    packer.pack_map(1);                                 // MESSAGE 3
     // key:
-    packer.pack("binary_item");
+    packer.pack("binary_item");                         // MESSAGE 3
     // pack as binary with length l, first set lenght:
-    packer.pack_bin(10);
+    packer.pack_bin(10);                                // MESSAGE 3
     // set data as char array:
-    packer.pack_bin_body("abcdefghij", 10);
+    packer.pack_bin_body("abcdefghij", 10);             // MESSAGE 3
 
     // Write out:
     fclose(file_rw);
@@ -107,24 +107,24 @@ void stream_rw(){
     // create a key-value pair packer linked to file-buffer
     msgpack::packer<msgpack::sbuffer> packer(&streamBuffer);
     // create key-value map definition, n = number of items in map...
-    packer.pack_map(1);
+    packer.pack_map(1);                                         // MESSAGE 1
     // Populate:
     // key
-    packer.pack(std::string("x"));
+    packer.pack(std::string("x"));                              // MESSAGE 1
     // value
-    packer.pack(3);
+    packer.pack(3);                                             // MESSAGE 1
     // pack as binary with length l, first set lenght:
-    packer.pack_bin(10);
+    packer.pack_bin(10);                                        // MESSAGE 2
     // set data as char array:
-    packer.pack_bin_body("abcdefghij", 10);
+    packer.pack_bin_body("abcdefghij", 10);                     // MESSAGE 2
     // key value with binary...
-    packer.pack_map(1);
+    packer.pack_map(1);                                         // MESSAGE 3
     // key:
-    packer.pack("binary_item");
+    packer.pack("binary_item");                                 // MESSAGE 3
     // pack as binary with length l, first set lenght:
-    packer.pack_bin(10);
+    packer.pack_bin(10);                                        // MESSAGE 3
     // set data as char array:
-    packer.pack_bin_body("abcdefghij", 10);
+    packer.pack_bin_body("abcdefghij", 10);                     // MESSAGE 3
 
     // deserializes these objects using msgpack::unpacker.
     msgpack::unpacker unpacker;
