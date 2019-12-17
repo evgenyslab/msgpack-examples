@@ -1,47 +1,4 @@
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <sstream>
-#include "msgpack-c/include/msgpack.hpp"
-#include "msgpack-c/include/msgpack/fbuffer.hpp"
-
-
-
-std::map<msgpack::type::object_type, std::string> typeMap{
-        {msgpack::type::object_type::NIL, "NIL"},
-        {msgpack::type::object_type::BOOLEAN, "BOOLEAN"},
-        {msgpack::type::object_type::POSITIVE_INTEGER, "POSITIVE_INTEGER"},
-        {msgpack::type::object_type::NEGATIVE_INTEGER, "NEGATIVE_INTEGER"},
-        {msgpack::type::object_type::FLOAT32, "FLOAT32"},
-        {msgpack::type::object_type::FLOAT64, "FLOAT64"},
-        {msgpack::type::object_type::FLOAT, "FLOAT"},
-        {msgpack::type::object_type::STR, "STR"},
-        {msgpack::type::object_type::BIN, "BIN"},
-        {msgpack::type::object_type::ARRAY, "ARRAY"},
-        {msgpack::type::object_type::MAP, "MAP"},
-        {msgpack::type::object_type::EXT, "EXT"},
-};
-
-
-void printout(msgpack::unpacker &unpacker){
-    // generic object handler:
-    msgpack::object_handle _oh;
-    // loop through data in the unpacker and place it into object handle
-    while(unpacker.next(_oh)) {
-        // instantiate msgpack object:
-        auto mpk_obj = _oh.get();
-        // do work on object.
-        if (mpk_obj.type != msgpack::v1::type::NIL){
-            if (mpk_obj.type == msgpack::v1::type::MAP){
-                std::cout << "Map Object:\n";
-                std::cout <<"\tKey: " << mpk_obj.via.map.ptr->key << ",\t type: " << typeMap[mpk_obj.via.map.ptr->key.type] << "\n";
-                std::cout <<"\tVal: " << mpk_obj.via.map.ptr->val << ",\t type: " << typeMap[mpk_obj.via.map.ptr->val.type] << "\n";
-                // TODO: what is the best way to extract?
-            }else
-                std::cout << "Item: " << mpk_obj << ", \t type: " << typeMap[mpk_obj.type] << "\n";
-        }
-    }
-}
+#include "header.h"
 
 void file_rw(){
     /*
@@ -67,13 +24,16 @@ void file_rw(){
     // set data as char array:
     packer.pack_bin_body("abcdefghij", 10);
     // key value with binary...
-    packer.pack_map(1);
+    packer.pack_map(2);
     // key:
     packer.pack("binary_item");
     // pack as binary with length l, first set lenght:
     packer.pack_bin(10);
     // set data as char array:
     packer.pack_bin_body("abcdefghij", 10);
+    // key:
+    packer.pack("second_item");
+    packer.pack("hello_there");
 
     // Write out:
     fclose(file_rw);
@@ -103,8 +63,8 @@ void stream_rw(){
     * */
     printf("Stream Write / Read example\n");
     // Create msgpack stream buffer object
-    msgpack::sbuffer streamBuffer;  // file buffer
-    // create a key-value pair packer linked to file-buffer
+    msgpack::sbuffer streamBuffer;  // stream buffer
+    // create a key-value pair packer linked to stream-buffer
     msgpack::packer<msgpack::sbuffer> packer(&streamBuffer);
     // create key-value map definition, n = number of items in map...
     packer.pack_map(1);
@@ -126,6 +86,7 @@ void stream_rw(){
     // set data as char array:
     packer.pack_bin_body("abcdefghij", 10);
 
+
     // deserializes these objects using msgpack::unpacker.
     msgpack::unpacker unpacker;
 
@@ -134,7 +95,6 @@ void stream_rw(){
     memcpy(unpacker.buffer(), streamBuffer.data(), streamBuffer.size());
     unpacker.buffer_consumed(streamBuffer.size());
     unpacker.data(); // still NIL
-    // now starts streaming deserialization.
     // now starts streaming deserialization.
     printout(unpacker);
 }

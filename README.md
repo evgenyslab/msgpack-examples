@@ -5,13 +5,16 @@ A repository of usefull C++/Python msgpack examples
 
 ## C++
 
-Write key-value pair
+### Read and Write IO
 
-Write to stream
+- create sbuffer message pack, unpack and print
+- create fbuffer message pack, save to file, load file, print
 
-Socket stream & socket stream read
+### Simple Buffer to File Buffer
 
-read file from memory and unpack / parse
-
+- an interesting example of a local pack object whose data is trasferred to
+a file buffer pack object, written out.
+- can be useful for creating re-usable pack objects such as headers for
+larger pack files.
 
 ## Python

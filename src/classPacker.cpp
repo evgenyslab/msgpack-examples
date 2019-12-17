@@ -1,28 +1,7 @@
 //
 //
 
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <sstream>
-#include "msgpack-c/include/msgpack.hpp"
-#include "msgpack-c/include/msgpack/fbuffer.hpp"
-
-std::map<msgpack::type::object_type, std::string> typeMap{
-        {msgpack::type::object_type::NIL, "NIL"},
-        {msgpack::type::object_type::BOOLEAN, "BOOLEAN"},
-        {msgpack::type::object_type::POSITIVE_INTEGER, "POSITIVE_INTEGER"},
-        {msgpack::type::object_type::NEGATIVE_INTEGER, "NEGATIVE_INTEGER"},
-        {msgpack::type::object_type::FLOAT32, "FLOAT32"},
-        {msgpack::type::object_type::FLOAT64, "FLOAT64"},
-        {msgpack::type::object_type::FLOAT, "FLOAT"},
-        {msgpack::type::object_type::STR, "STR"},
-        {msgpack::type::object_type::BIN, "BIN"},
-        {msgpack::type::object_type::ARRAY, "ARRAY"},
-        {msgpack::type::object_type::MAP, "MAP"},
-        {msgpack::type::object_type::EXT, "EXT"},
-};
-
+#include "header.h"
 
 class mpacker{
 public:
