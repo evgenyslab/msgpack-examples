@@ -6,7 +6,7 @@ Basic msgpack reading into array or dictionary
 import msgpack
 
 # open msgpack file:
-fileName = "/home/rtuser/dev/private/msgpack-examples/cmake-build-debug/test02.mpk.active"
+fileName = "/home/rtuser/dev/private/msgpack-examples/cmake-build-debug/mypackfilefromstream.mpk"
 f = open(fileName, "rb")
 # use max_bin_length=val or max_array_length=val to circumvent internal
 # create unpacker object:
