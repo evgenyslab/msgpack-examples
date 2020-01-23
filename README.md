@@ -1,6 +1,14 @@
 # msgpack-examples
 A repository of usefull C++/Python msgpack examples
 
+# Getting Message Pack
+
+run:
+
+```bash
+git submodule update --init --recursive
+```
+
 # Examples to do:
 
 ## C++
